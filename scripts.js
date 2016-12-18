@@ -1,7 +1,7 @@
 // Sets auto quality to crap
 var ideaQuality = ['swill', 'plausible', 'genius'];
 
-// functions to enable/disable the save button
+// functions to enable/disable the save button/ clear inputs
 function enableSave() {
   $("#save-button").prop('disabled', false)
 };
@@ -10,7 +10,13 @@ function disableSave() {
   $("#save-button").prop('disabled', true)
 };
 
+function resetInputs() {
+  $('#title-input').val('');
+  $('#body-input').val('');
+};
+
 // keyup on input fields to enable save button
+
 $('#title-input, #body-input').on('keyup', function(){
   var titleInput = $('#title-input').val();
   var bodyInput = $('#body-input').val();
@@ -24,30 +30,43 @@ $('#title-input, #body-input').on('keyup', function(){
 // event listener on save
 $('#save-button').on('click', () => {
   console.log("fuck");
-  createIdea(NewIdeaFactory);
+  postIdea();
+  disableSave();
+  resetInputs();
 });
 
 // constructor
-function NewIdeaFactory(title, body, quality, uniqueid){
+function newIdeaFactory(title, body, quality, id){
   this.title = title;
   this.body = body;
   this.quality =  quality || ideaQuality[0];
-  this.uniqueid = uniqueid;
+  this.id = Date.now();
 };
 
+function postIdea() {
+  var titleInput = $('#title-input');
+  var bodyInput = $('#body-input');
+  var idea = new newIdeaFactory(titleInput.val(), bodyInput.val());
+  createIdea(idea);
+  // storeNewIdea(idea);
+  // console.log(storeNewIdea);
+}
 
-function createIdea(NewIdeaFactory) {
-  $('.ideas-list').prepend(
-    `<div id=${NewIdeaFactory.uniqueid}>
-      <div class="new-website-title-bookmark">${NewIdeaFactory.title}</div>
-      <hr>
-      <div class="new-website-url-bookmark">
-      <a href="${NewIdeaFactory.url}" target="_blank"> ${NewIdeaFactory.url}</a>
+function createIdea(newIdeaFactory) {
+  $('.ideas').prepend(
+    `<div id=${newIdeaFactory.id} class="new-ideas">
+      <div class="idea-header">
+        <h2 contentEditable="true">${newIdeaFactory.title}
+          <button class="delete"></button>
+        </h2>
       </div>
-      <hr>
-      <div class="buttons">
-      <button class="read-button">Read</button>
-      <button class="delete-button">Delete</button>
+      <div class="idea-body">
+        <p class="body" contentEditable="true"> ${newIdeaFactory.body}</p>
+      </div>
+      <div class="footer">
+        <button class="up"></button>
+        <button class="down"></button>
+        <div class="idea-quality">quality: ${newIdeaFactory.quality}</div>
       </div>
     </div>`
 )};
