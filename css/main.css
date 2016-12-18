@@ -1,0 +1,55 @@
+html, body {
+  font-family: 'Open-Sans', sans-serif; }
+
+h1 {
+  font-weight: 700;
+  font-family: "Roboto Slab", serif;
+ }
+
+.inputs-go-here {
+  width: 100%;
+  height: 220px;
+  background-color: #e5f3f2;
+  /*padding-bottom: 20px;*/
+}
+
+.input-h1 {
+  text-align: center;
+  padding: 20px 0 20px 0;
+}
+#header-box-text {
+  color: #6D6E71;
+}
+
+.inputs-go-here h1 {
+   color: #00a79d;
+   font-size: 50px;
+   display: inline-block;
+ }
+
+.inputs-go-here input,
+.inputs-go-here button,
+.inputs-go-here textarea,
+.ideas-go-here input {
+   display: block;
+   width: 75%;
+   margin: auto;
+   height: 20px;
+   margin-bottom: 20px;
+   border: 1px solid #D1D3D4;
+ }
+
+ #save-button {
+   background-color: #00A79D;
+   color: #FFFFFF;
+ }
+  #save-button:hover {
+    background-color: #045E55;
+  }
+  #save-button:disabled {
+    background-color: #00A79D
+  }
+
+ #search-ideas {
+   margin-top: 20px;
+ }
