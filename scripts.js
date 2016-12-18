@@ -21,8 +21,10 @@ $('#title-input, #body-input').on('keyup', function(){
   }
 });
 
+// event listener on save
 $('#save-button').on('click', () => {
   console.log("fuck");
+  createIdea(NewIdeaFactory);
 });
 
 // constructor
@@ -30,5 +32,22 @@ function NewIdeaFactory(title, body, quality, uniqueid){
   this.title = title;
   this.body = body;
   this.quality =  quality || ideaQuality[0];
-  this.uniqueid = uniqueid || Date.now();
+  this.uniqueid = uniqueid;
 };
+
+
+function createIdea(NewIdeaFactory) {
+  $('.ideas-list').prepend(
+    `<div id=${NewIdeaFactory.uniqueid}>
+      <div class="new-website-title-bookmark">${NewIdeaFactory.title}</div>
+      <hr>
+      <div class="new-website-url-bookmark">
+      <a href="${NewIdeaFactory.url}" target="_blank"> ${NewIdeaFactory.url}</a>
+      </div>
+      <hr>
+      <div class="buttons">
+      <button class="read-button">Read</button>
+      <button class="delete-button">Delete</button>
+      </div>
+    </div>`
+)};
