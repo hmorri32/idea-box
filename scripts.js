@@ -1,11 +1,13 @@
 // Quality array- easy to select later.
 var ideaQuality = ['swill', 'plausible', 'genius'];
+var ideaTank = JSON.parse(localStorage.getItem("savedArrayObject")) || [];
 
-function onLoadStorage() {
-  console.log(localStorage);
-}
-// arrays ?
-onLoadStorage();
+// function onLoadStorage() {
+//   console.log(localStorage);
+// }
+$(document).ready(function() {
+  getLocalStorage();
+})
 
 // functions to enable/disable the save button/ clear inputs
 function enableSave() {
@@ -37,6 +39,7 @@ $('#save-button').on('click', function() {
   postIdea();
   disableSave();
   resetInputs();
+
 });
 
 
@@ -44,12 +47,8 @@ $('.ideas').on('click', '.delete', function(e){
   $(e.target).closest('.new-ideas').remove();
 });
 
-// $('.ideas').on('click', '.delete', function(){
-//   var grabIdea = $(this).parent().parent()
-//   grabDiv.remove();
-// })
-
 // constructor
+
 function newIdeaFactory(title, body, quality, id){
   this.title = title;
   this.body = body;
@@ -60,13 +59,28 @@ function newIdeaFactory(title, body, quality, id){
 function postIdea() {
   var titleInput = $('#title-input');
   var bodyInput = $('#body-input');
-  var idea = new newIdeaFactory(titleInput.val(), bodyInput.val());
+  var title = titleInput.val();
+  var body = bodyInput.val();
+
+  var idea = new newIdeaFactory(title, body);
   createIdea(idea);
+  ideaTank.push(idea);
   storeNewIdea(idea);
 }
 
-storeNewIdea = function(newIdeaFactory) {
-  localStorage.setItem(newIdeaFactory.id, JSON.stringify(newIdeaFactory));
+storeNewIdea = function() {
+  localStorage.setItem("savedArrayObject", JSON.stringify(ideaTank));
+}
+// learn about splice
+
+getLocalStorage = function() {
+  var persist = JSON.parse(localStorage.getItem("savedArrayObject"));
+  if (persist) {
+    for (i = 0; i < persist.length; i++) {
+      var idea = persist[i];
+      createIdea(idea);
+    }
+  }
 }
 
 function createIdea(newIdeaFactory) {
