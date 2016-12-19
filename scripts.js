@@ -2,13 +2,11 @@
 var ideaQuality = ['swill', 'plausible', 'genius'];
 var ideaTank = JSON.parse(localStorage.getItem("savedArrayObject")) || [];
 
-// function onLoadStorage() {
-//   console.log(localStorage);
-// }
+// grabs local storage on load. Persisting.
 $(document).ready(function() {
   getLocalStorage();
   console.log(localStorage);
-})
+});
 
 // functions to enable/disable the save button/ clear inputs
 function enableSave() {
@@ -42,13 +40,12 @@ $('#save-button').on('click', function() {
   resetInputs();
 });
 
-
+// Delete button
 $('.ideas').on('click', '.delete', function(e){
   $(e.target).closest('.new-ideas').remove();
 });
 
 // constructor
-
 function newIdeaFactory(title, body, quality, id){
   this.title = title;
   this.body = body;
