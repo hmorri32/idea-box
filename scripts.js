@@ -1,5 +1,12 @@
-// Sets auto quality to crap
+// Quality array- easy to select later.
 var ideaQuality = ['swill', 'plausible', 'genius'];
+
+function onLoadStorage() {
+  console.log(localStorage);
+}
+// arrays ?
+
+onLoadStorage();
 
 // functions to enable/disable the save button/ clear inputs
 function enableSave() {
@@ -16,7 +23,6 @@ function resetInputs() {
 };
 
 // keyup on input fields to enable save button
-
 $('#title-input, #body-input').on('keyup', function(){
   var titleInput = $('#title-input').val();
   var bodyInput = $('#body-input').val();
@@ -29,7 +35,6 @@ $('#title-input, #body-input').on('keyup', function(){
 
 // event listener on save btn
 $('#save-button').on('click', function() {
-  console.log("fuck");
   postIdea();
   disableSave();
   resetInputs();
@@ -46,7 +51,7 @@ function newIdeaFactory(title, body, quality, id){
 function postIdea() {
   var titleInput = $('#title-input');
   var bodyInput = $('#body-input');
-  let idea = new newIdeaFactory(titleInput.val(), bodyInput.val());
+  var idea = new newIdeaFactory(titleInput.val(), bodyInput.val());
   createIdea(idea);
   storeNewIdea(idea);
 }
