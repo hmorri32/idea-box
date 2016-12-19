@@ -7,6 +7,7 @@ var ideaTank = JSON.parse(localStorage.getItem("savedArrayObject")) || [];
 // }
 $(document).ready(function() {
   getLocalStorage();
+  console.log(localStorage);
 })
 
 // functions to enable/disable the save button/ clear inputs
@@ -39,7 +40,6 @@ $('#save-button').on('click', function() {
   postIdea();
   disableSave();
   resetInputs();
-
 });
 
 
@@ -61,16 +61,15 @@ function postIdea() {
   var bodyInput = $('#body-input');
   var title = titleInput.val();
   var body = bodyInput.val();
-
   var idea = new newIdeaFactory(title, body);
   createIdea(idea);
   ideaTank.push(idea);
   storeNewIdea(idea);
-}
+};
 
 storeNewIdea = function() {
   localStorage.setItem("savedArrayObject", JSON.stringify(ideaTank));
-}
+};
 // learn about splice
 
 getLocalStorage = function() {
@@ -81,7 +80,7 @@ getLocalStorage = function() {
       createIdea(idea);
     }
   }
-}
+};
 
 function createIdea(newIdeaFactory) {
   $('.ideas').prepend(
