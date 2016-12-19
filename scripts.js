@@ -5,7 +5,6 @@ function onLoadStorage() {
   console.log(localStorage);
 }
 // arrays ?
-
 onLoadStorage();
 
 // functions to enable/disable the save button/ clear inputs
@@ -39,6 +38,16 @@ $('#save-button').on('click', function() {
   disableSave();
   resetInputs();
 });
+
+
+$('.ideas').on('click', '.delete', function(e){
+  $(e.target).closest('.new-ideas').remove();
+});
+
+// $('.ideas').on('click', '.delete', function(){
+//   var grabIdea = $(this).parent().parent()
+//   grabDiv.remove();
+// })
 
 // constructor
 function newIdeaFactory(title, body, quality, id){
