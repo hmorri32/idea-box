@@ -93,7 +93,7 @@ function createIdea(newIdeaFactory) {
       <div class="footer">
         <button class="up"></button>
         <button class="down"></button>
-        <div class="idea-quality">quality: ${newIdeaFactory.quality}</div>
+        <div class="idea-quality"><span>quality:</span> ${newIdeaFactory.quality}</div>
       </div>
     </div>`
 )};

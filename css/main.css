@@ -2,9 +2,9 @@ html, body {
   font-family: 'Open-Sans', sans-serif; }
 
 h1,
-h2 {
+h2,
+span {
   font-weight: 700;
-  font-size: 25px;
   font-family: "Roboto Slab", serif;
  }
 
@@ -65,10 +65,27 @@ h2 {
   width: 75%;
   margin: auto;
   margin-bottom: 30px;
-  border: 1px solid black;
+  border-bottom: 1px solid #D1D3D4;
 }
-
-
+.new-ideas {
+  color: #6D6E71;
+}
+.new-ideas h2 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+.new-ideas p {
+  color: #939598;
+  margin-bottom: 10px;
+}
+.idea-quality {
+  font-size: 20px;
+  display: inline-block;
+  vertical-align: super;
+}
+.footer {
+  margin-bottom: 10px;
+}
 
 .delete {
   display: inline-block;
