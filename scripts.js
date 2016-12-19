@@ -1,6 +1,7 @@
 // Quality array- easy to select later.
 var ideaQuality = ['swill', 'plausible', 'genius'];
 
+
 function onLoadStorage() {
   console.log(localStorage);
 }
@@ -10,12 +11,12 @@ onLoadStorage();
 
 // functions to enable/disable the save button/ clear inputs
 function enableSave() {
-  $("#save-button").prop('disabled', false)
+  $("#save-button").prop('disabled', false);
 };
 
 function disableSave() {
-  $("#save-button").prop('disabled', true)
-};
+  $("#save-button").prop('disabled', true);
+}
 
 function resetInputs() {
   $('#title-input').val('');
@@ -27,18 +28,23 @@ $('#title-input, #body-input').on('keyup', function(){
   var titleInput = $('#title-input').val();
   var bodyInput = $('#body-input').val();
   if(titleInput.length >= 1 && bodyInput.length >= 1){
-    enableSave()
+    enableSave();
   } else {
-    disableSave()
+    disableSave();
   }
 });
 
-// event listener on save btn
+// event listener on buttons
 $('#save-button').on('click', function() {
   postIdea();
   disableSave();
   resetInputs();
 });
+
+$('.ideas').on('click', '.delete', function() {
+  $(this).parent().parent().parent().remove();
+});
+
 
 // constructor
 function newIdeaFactory(title, body, quality, id){
@@ -58,7 +64,7 @@ function postIdea() {
 
 storeNewIdea = function(newIdeaFactory) {
   localStorage.setItem(newIdeaFactory.id, JSON.stringify(newIdeaFactory));
-}
+};
 
 function createIdea(newIdeaFactory) {
   $('.ideas').prepend(
@@ -77,4 +83,4 @@ function createIdea(newIdeaFactory) {
         <div class="idea-quality">quality: ${newIdeaFactory.quality}</div>
       </div>
     </div>`
-)};
+);}
