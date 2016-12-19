@@ -1,8 +1,10 @@
 html, body {
   font-family: 'Open-Sans', sans-serif; }
 
-h1 {
+h1,
+h2 {
   font-weight: 700;
+  font-size: 25px;
   font-family: "Roboto Slab", serif;
  }
 
@@ -16,6 +18,7 @@ h1 {
   text-align: center;
   padding: 20px 0 20px 0;
 }
+
 #header-box-text {
   color: #6D6E71;
 }
@@ -62,7 +65,10 @@ h1 {
   width: 75%;
   margin: auto;
   margin-bottom: 30px;
+  border: 1px solid black;
 }
+
+
 
 .delete {
   display: inline-block;
