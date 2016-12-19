@@ -27,8 +27,8 @@ $('#title-input, #body-input').on('keyup', function(){
   }
 });
 
-// event listener on save
-$('#save-button').on('click', () => {
+// event listener on save btn
+$('#save-button').on('click', function() {
   console.log("fuck");
   postIdea();
   disableSave();
@@ -40,16 +40,19 @@ function newIdeaFactory(title, body, quality, id){
   this.title = title;
   this.body = body;
   this.quality =  quality || ideaQuality[0];
-  this.id = Date.now();
+  this.id = id || Date.now();
 };
 
 function postIdea() {
   var titleInput = $('#title-input');
   var bodyInput = $('#body-input');
-  var idea = new newIdeaFactory(titleInput.val(), bodyInput.val());
+  let idea = new newIdeaFactory(titleInput.val(), bodyInput.val());
   createIdea(idea);
-  // storeNewIdea(idea);
-  // console.log(storeNewIdea);
+  storeNewIdea(idea);
+}
+
+storeNewIdea = function(newIdeaFactory) {
+  localStorage.setItem(newIdeaFactory.id, JSON.stringify(newIdeaFactory));
 }
 
 function createIdea(newIdeaFactory) {
