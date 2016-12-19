@@ -74,8 +74,28 @@ h1 {
   width: 30px;
   vertical-align: top;
 }
-.delete-idea:hover {
-  background-image: url("../Images/delete-hover.svg");
-  background-position: inherit;
-  cursor: pointer;
-  }
+.delete:hover {
+  background-image: url("../images/delete-hover.svg");
+}
+
+.up {
+  background: transparent;
+  border: none;
+  background-image: url("../images/upvote.svg");
+  height: 30px;
+  width: 30px;
+}
+.up:hover {
+  background-image: url("../images/upvote-hover.svg");
+}
+
+.down {
+  background: transparent;
+  border: none;
+  background-image: url("../images/downvote.svg");
+  height: 30px;
+  width: 30px;
+}
+.down:hover {
+  background-image: url("../images/downvote-hover.svg");
+}
