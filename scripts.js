@@ -1,22 +1,21 @@
 // Quality array- easy to select later.
 var ideaQuality = ['swill', 'plausible', 'genius'];
+var ideaTank = JSON.parse(localStorage.getItem("savedArrayObject")) || [];
 
-
-function onLoadStorage() {
+// grabs local storage on load. Persisting.
+$(document).ready(function() {
+  getLocalStorage();
   console.log(localStorage);
-}
-// arrays ?
-
-onLoadStorage();
+});
 
 // functions to enable/disable the save button/ clear inputs
 function enableSave() {
-  $("#save-button").prop('disabled', false);
+  $("#save-button").prop('disabled', false)
 };
 
 function disableSave() {
-  $("#save-button").prop('disabled', true);
-}
+  $("#save-button").prop('disabled', true)
+};
 
 function resetInputs() {
   $('#title-input').val('');
@@ -28,23 +27,23 @@ $('#title-input, #body-input').on('keyup', function(){
   var titleInput = $('#title-input').val();
   var bodyInput = $('#body-input').val();
   if(titleInput.length >= 1 && bodyInput.length >= 1){
-    enableSave();
+    enableSave()
   } else {
-    disableSave();
+    disableSave()
   }
 });
 
-// event listener on buttons
+// event listener on save btn
 $('#save-button').on('click', function() {
   postIdea();
   disableSave();
   resetInputs();
 });
 
-$('.ideas').on('click', '.delete', function() {
-  $(this).parent().parent().parent().remove();
+// Delete button
+$('.ideas').on('click', '.delete', function(e){
+  $(e.target).closest('.new-ideas').remove();
 });
-
 
 // constructor
 function newIdeaFactory(title, body, quality, id){
@@ -57,13 +56,27 @@ function newIdeaFactory(title, body, quality, id){
 function postIdea() {
   var titleInput = $('#title-input');
   var bodyInput = $('#body-input');
-  var idea = new newIdeaFactory(titleInput.val(), bodyInput.val());
+  var title = titleInput.val();
+  var body = bodyInput.val();
+  var idea = new newIdeaFactory(title, body);
   createIdea(idea);
+  ideaTank.push(idea);
   storeNewIdea(idea);
-}
+};
 
-storeNewIdea = function(newIdeaFactory) {
-  localStorage.setItem(newIdeaFactory.id, JSON.stringify(newIdeaFactory));
+storeNewIdea = function() {
+  localStorage.setItem("savedArrayObject", JSON.stringify(ideaTank));
+};
+// learn about splice
+
+getLocalStorage = function() {
+  var persist = JSON.parse(localStorage.getItem("savedArrayObject"));
+  if (persist) {
+    for (i = 0; i < persist.length; i++) {
+      var idea = persist[i];
+      createIdea(idea);
+    }
+  }
 };
 
 function createIdea(newIdeaFactory) {
@@ -83,4 +96,4 @@ function createIdea(newIdeaFactory) {
         <div class="idea-quality">quality: ${newIdeaFactory.quality}</div>
       </div>
     </div>`
-);}
+)};
