@@ -175,62 +175,23 @@ function createIdea(newIdeaFactory) {
 
 // Search Notes
 
-// function liveSearch(){
-//  $('#live-search-ideas').on('keyup', function(){
-//
-//    var searchInput = $(this).val().toLowerCase();
-//
-//    $('.new-ideas').each(function(title, body){
-//
-//      var title = $(this).find(title).text().toLowerCase();
-//      var checkBody = title.indexOf(searchInput) !== -1;
-//
-//      if (checkBody){
-//        $(title).show();
-//      } else {
-//        $(title).hide();
-//      }
-//    });
-//  });
-// }
-//
-//
-// var searchInput = $('#search');
-// // var inspirationElement =
-//
-// searchInput.on('keyup', function(){
-//   var searchTerm = $(this).val().toLowerCase();
-//   $('.inspiration').each(function (index, element) {
-//     var text = $(element).text().toLowerCase();
-//     var match = !!text.match(searchTerm);
-//     $(element).toggle(match);
-//     // if (match) {
-//     //   $(element).show();
-//     // } else {
-//     //   $(element).hide();
-//     // }
-//
-//   })
-// });
-//
-// // $('.live-search-list li').each(function(){
-// // $(this).attr('data-search-term', $(this).text().toLowerCase());
-// // });
-//
-// $('.live-search-box').on('keyup', function(){
-//
-// var searchTerm = $(this).val().toLowerCase();
-//
-//     $('.live-search-list li').each(function(){
-//
-//         if ($(this).filter('[data-search-term *= ' + searchTerm + ']').length > 0 || searchTerm.length < 1) {
-//             $(this).show();
-//         } else {
-//             $(this).hide();
-//         }
-//
-//     });
-//
-// });
-//
-// });
+
+var searchInput = $('#live-search-ideas');
+// var inspirationElement =
+
+searchInput.on('keyup', function(){
+  var searchTerm = $(this).val().toLowerCase();
+  $('.new-ideas').each(function (index, element) {
+    var text = $(element).text().toLowerCase();
+    var match = !!text.match(searchTerm);
+    $(element).toggle(match);
+    // if (match) {
+    //   $(element).show();
+    // } else {
+    //   $(element).hide();
+    // }
+
+  })
+
+
+});
