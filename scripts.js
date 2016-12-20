@@ -53,7 +53,7 @@ $('.ideas').on('click', '.delete', function() {
 
   for (i = 0; i < ideaTank.length; i++){
     if (Number(divId) === ideaTank[i].id) {
-      ideaTank.splice(i, i);
+      ideaTank.splice(i, 1);
       storeNewIdea();
     }
   }
