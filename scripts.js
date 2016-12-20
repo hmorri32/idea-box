@@ -22,7 +22,6 @@ function resetInputs() {
   $('#body-input').val('');
 };
 
-
 // keyup on input fields to enable save button
 $('#title-input, #body-input').on('keyup', function(){
   var titleInput = $('#title-input').val();
@@ -34,7 +33,6 @@ $('#title-input, #body-input').on('keyup', function(){
   }
 });
 
-
 // event listener on save btn
 $('#save-button').on('click', function() {
   postIdea();
@@ -42,12 +40,10 @@ $('#save-button').on('click', function() {
   resetInputs();
 });
 
-
 // Delete button
 $('.ideas').on('click', '.delete', function(e) {
   $(e.target).closest('.new-ideas').remove();
 });
-
 
 // Upvote and downvote buttons
 $('.ideas').on('click', '.up', function() {
