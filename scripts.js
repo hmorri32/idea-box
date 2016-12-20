@@ -86,10 +86,9 @@ $('.ideas').on('click', '.down', function() {
   for (i = 0; i < ideaTank.length; i++) {
     if(Number(divId) === ideaTank[i].id) {
       ideaTank[i].quality = downvotedText;
-      console.log(divId)
+      storeNewIdea();
     }
   }
-
 });
 
 
