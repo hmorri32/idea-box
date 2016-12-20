@@ -8,6 +8,16 @@ $(document).ready(function() {
   console.log(localStorage);
 });
 
+getLocalStorage = function() {
+  var persist = JSON.parse(localStorage.getItem("savedArrayObject"));
+  if (persist) {
+    for (i = 0; i < persist.length; i++) {
+      var idea = persist[i];
+      createIdea(idea);
+    }
+  }
+};
+
 // functions to enable/disable the save button/ clear inputs
 function enableSave() {
   $("#save-button").prop('disabled', false)
@@ -54,7 +64,7 @@ $('.ideas').on('click', '.delete', function(e) {
     // if 0 items, local storage clear or whatever
 }});
 
-// Upvote and button
+// Upvote button
 $('.ideas').on('click', '.up', function() {
 var closestQuality = $(this).closest('.new-ideas').find('.quality')
 var closestQualityVal = closestQuality.text();
@@ -70,7 +80,6 @@ for (i = 0; i < storedArray.length; i++) {
   }
 }});
 
-
 function upvoteButton(quality) {
   switch (quality) {
     case 'swill':
@@ -81,7 +90,6 @@ function upvoteButton(quality) {
       return 'genius';
   }
 }
-
 
 // constructor
 function newIdeaFactory(title, body){
@@ -107,15 +115,6 @@ storeNewIdea = function() {
 };
 // learn about splice
 
-getLocalStorage = function() {
-  var persist = JSON.parse(localStorage.getItem("savedArrayObject"));
-  if (persist) {
-    for (i = 0; i < persist.length; i++) {
-      var idea = persist[i];
-      createIdea(idea);
-    }
-  }
-};
 
 function createIdea(newIdeaFactory) {
   $('.ideas').prepend(
@@ -138,3 +137,22 @@ function createIdea(newIdeaFactory) {
 
 
 // Search
+
+function liveSearch(){
+ $('#live-search-ideas').on('keyup', function(){
+
+   var searchInput = $(this).val().toLowerCase();
+
+   $('.new-ideas').each(function(title, body){
+
+     var title = $(this).find(title).text().toLowerCase();
+     var checkBody = title.indexOf(searchInput) !== -1;
+
+     if (checkBody){
+       $(title).show();
+     } else {
+       $(title).hide();
+     }
+   });
+ });
+}
