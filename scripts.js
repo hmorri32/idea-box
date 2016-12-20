@@ -8,6 +8,13 @@ $(document).ready(function() {
 });
 
 // Helper functions
+getLocalStorageThenAppendIt = function() {
+  for (i = 0; i < ideaTank.length; i++) {
+    var idea = ideaTank[i];
+    createIdea(idea);
+  }
+};
+
 function enableSaveButton() {
   $("#save-button").prop('disabled', false)
 };
@@ -19,13 +26,6 @@ function disableSaveButton() {
 function resetInputs() {
   $('#title-input').val('');
   $('#body-input').val('');
-};
-
-getLocalStorageThenAppendIt = function() {
-  for (i = 0; i < ideaTank.length; i++) {
-    var idea = ideaTank[i];
-    createIdea(idea);
-  }
 };
 
 function upvoteButton(quality) {
