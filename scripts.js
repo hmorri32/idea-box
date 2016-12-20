@@ -51,11 +51,16 @@ $('.ideas').on('click', '.delete', function(e) {
 
 // Upvote and downvote buttons
 $('.ideas').on('click', '.up', function() {
-var closestQuality = $(this).closest('.new-ideas').find('new-quality')
+var closestQuality = $(this).closest('.new-ideas').find('.quality')
 var closestQualityVal = closestQuality.text();
 var upvotedText = upvoteButton(closestQualityVal);
 closestQuality.text(upvotedText);
-console.log(closestQuality)
+
+var id = $(this).closest('.new-ideas').prop('id')
+var newId = JSON.parse(localStorage.getItem('savedArrayObject'))
+console.log(newId);
+// newId.quality = upvotedText;
+// console.log(newId.quality);
 });
 
 function upvoteButton(quality) {
@@ -64,10 +69,8 @@ function upvoteButton(quality) {
       return 'plausible'
     case 'plausible':
       return 'genius'
-    // case ideaQuality[1]:
-    //   return ideaQuality[2]
-    // default:
-    //   return ideaQuality[2];
+    default:
+      return 'genius';
   }
 }
 
@@ -77,7 +80,7 @@ function newIdeaFactory(title, body){
   this.title = title;
   this.body = body;
   this.quality = 'swill';
-  this.id = id || Date.now();
+  this.id = Date.now();
 };
 
 function postIdea() {
@@ -120,7 +123,7 @@ function createIdea(newIdeaFactory) {
       <div class="footer">
         <button class="up"></button>
         <button class="down"></button>
-        <div class="idea-quality"><span>quality:</span> <span class="new-quality">${newIdeaFactory.quality}</span></div>
+        <div class="idea-quality"><span>quality:</span> <span class="quality">${newIdeaFactory.quality}</span></div>
       </div>
     </div>`
 )};
