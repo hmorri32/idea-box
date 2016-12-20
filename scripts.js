@@ -103,7 +103,7 @@ function downvoteButton(quality) {
   }
 };
 
-// constructor
+// constructor and relevant helper functions
 function newIdeaFactory(title, body){
   this.title = title;
   this.body = body;
