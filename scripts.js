@@ -185,13 +185,5 @@ searchInput.on('keyup', function(){
     var text = $(element).text().toLowerCase();
     var match = !!text.match(searchTerm);
     $(element).toggle(match);
-    // if (match) {
-    //   $(element).show();
-    // } else {
-    //   $(element).hide();
-    // }
-
   })
-
-
 });
