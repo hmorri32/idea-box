@@ -138,21 +138,60 @@ function createIdea(newIdeaFactory) {
 
 // Search
 
-function liveSearch(){
- $('#live-search-ideas').on('keyup', function(){
+// function liveSearch(){
+//  $('#live-search-ideas').on('keyup', function(){
+//
+//    var searchInput = $(this).val().toLowerCase();
+//
+//    $('.new-ideas').each(function(title, body){
+//
+//      var title = $(this).find(title).text().toLowerCase();
+//      var checkBody = title.indexOf(searchInput) !== -1;
+//
+//      if (checkBody){
+//        $(title).show();
+//      } else {
+//        $(title).hide();
+//      }
+//    });
+//  });
+// }
 
-   var searchInput = $(this).val().toLowerCase();
 
-   $('.new-ideas').each(function(title, body){
+$('.new-ideas h2 p').each(function(){
+$(this).attr('data-search-term', $(this).text().toLowerCase());
+});
+$('#live-search-ideas').on('keyup', function(){
+  var searchTerm = $(this).val().toLowerCase();
+    $('.new-ideas h2 p').each(function(){
+      if ($(this).filter('[data-search-term *= ' + searchTerm + ']').length > 0 || searchTerm.length < 1) {
+          $(this).show();
+      } else {
+          $(this).hide();
+      }
 
-     var title = $(this).find(title).text().toLowerCase();
-     var checkBody = title.indexOf(searchInput) !== -1;
+          });
+    });
 
-     if (checkBody){
-       $(title).show();
-     } else {
-       $(title).hide();
-     }
-   });
- });
-}
+//
+// // $('.live-search-list li').each(function(){
+// // $(this).attr('data-search-term', $(this).text().toLowerCase());
+// // });
+//
+// $('.live-search-box').on('keyup', function(){
+//
+// var searchTerm = $(this).val().toLowerCase();
+//
+//     $('.live-search-list li').each(function(){
+//
+//         if ($(this).filter('[data-search-term *= ' + searchTerm + ']').length > 0 || searchTerm.length < 1) {
+//             $(this).show();
+//         } else {
+//             $(this).hide();
+//         }
+//
+//     });
+//
+// });
+//
+// });
