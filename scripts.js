@@ -1,5 +1,5 @@
 // Quality array- easy to select later.
-var ideaQuality = ['swill', 'plausible', 'genius'];
+// var ideaQuality = ['swill', 'plausible', 'genius'];
 var ideaTank = JSON.parse(localStorage.getItem("savedArrayObject")) || [];
 
 // grabs local storage on load. Persisting.
@@ -22,6 +22,7 @@ function resetInputs() {
   $('#body-input').val('');
 };
 
+
 // keyup on input fields to enable save button
 $('#title-input, #body-input').on('keyup', function(){
   var titleInput = $('#title-input').val();
@@ -33,6 +34,7 @@ $('#title-input, #body-input').on('keyup', function(){
   }
 });
 
+
 // event listener on save btn
 $('#save-button').on('click', function() {
   postIdea();
@@ -40,16 +42,41 @@ $('#save-button').on('click', function() {
   resetInputs();
 });
 
+
 // Delete button
-$('.ideas').on('click', '.delete', function(e){
+$('.ideas').on('click', '.delete', function(e) {
   $(e.target).closest('.new-ideas').remove();
 });
 
+
+// Upvote and downvote buttons
+$('.ideas').on('click', '.up', function() {
+var closestQuality = $(this).closest('.new-ideas').find('new-quality')
+var closestQualityVal = closestQuality.text();
+var upvotedText = upvoteButton(closestQualityVal);
+closestQuality.text(upvotedText);
+console.log(closestQuality)
+});
+
+function upvoteButton(quality) {
+  switch (quality) {
+    case 'swill':
+      return 'plausible'
+    case 'plausible':
+      return 'genius'
+    // case ideaQuality[1]:
+    //   return ideaQuality[2]
+    // default:
+    //   return ideaQuality[2];
+  }
+}
+
+
 // constructor
-function newIdeaFactory(title, body, quality, id){
+function newIdeaFactory(title, body){
   this.title = title;
   this.body = body;
-  this.quality =  quality || ideaQuality[0];
+  this.quality = 'swill';
   this.id = id || Date.now();
 };
 
@@ -93,7 +120,7 @@ function createIdea(newIdeaFactory) {
       <div class="footer">
         <button class="up"></button>
         <button class="down"></button>
-        <div class="idea-quality"><span>quality:</span> ${newIdeaFactory.quality}</div>
+        <div class="idea-quality"><span>quality:</span> <span class="new-quality">${newIdeaFactory.quality}</span></div>
       </div>
     </div>`
 )};
