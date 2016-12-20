@@ -48,7 +48,7 @@ span {
  margin-bottom: 20px;
  border: 1px solid #D1D3D4;
  }
-
+ 
 #body-input {
  resize: none;
 }
@@ -86,6 +86,7 @@ span {
   color: #939598;
   margin-bottom: 10px;
 }
+
 .idea-quality {
   font-size: 20px;
   display: inline-block;

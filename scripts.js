@@ -1,14 +1,11 @@
+// Get Local storage variable
 var ideaTank = JSON.parse(localStorage.getItem("savedArrayObject")) || [];
 
-// grabs local storage on load. Persisting.
+// grabs local storage on load. appends it.
 $(document).ready(function() {
   getLocalStorageThenAppendIt();
   console.log(localStorage);
 });
-
-getLocalStorage = function() {
-
-}
 
 getLocalStorageThenAppendIt = function() {
   for (i = 0; i < ideaTank.length; i++) {
@@ -172,11 +169,5 @@ searchInput.on('keyup', function(){
     var text = $(element).text().toLowerCase();
     var match = !!text.match(searchTerm);
     $(element).toggle(match);
-    // if (match) {
-//   $(element).show();
-// } else {
-//   $(element).hide();
-// }
-
   })
 });
