@@ -1,20 +1,13 @@
-// Get Local storage variable
+// Global Var - Local Storage Array
 var ideaTank = JSON.parse(localStorage.getItem("savedArrayObject")) || [];
 
-// grabs local storage on load. appends it.
+// Grabs local storage stuff on load. Appends it.
 $(document).ready(function() {
   getLocalStorageThenAppendIt();
   console.log(localStorage);
 });
 
-getLocalStorageThenAppendIt = function() {
-  for (i = 0; i < ideaTank.length; i++) {
-    var idea = ideaTank[i];
-    createIdea(idea);
-  }
-};
-
-// functions to enable/disable the save button/ clear inputs
+// Helper functions
 function enableSaveButton() {
   $("#save-button").prop('disabled', false)
 };
@@ -28,59 +21,13 @@ function resetInputs() {
   $('#body-input').val('');
 };
 
-// keyup on input fields to enable save button
-$('#title-input, #body-input').on('keyup', function(){
-  var titleInput = $('#title-input').val();
-  var bodyInput = $('#body-input').val();
-  if(titleInput.length >= 1 && bodyInput.length >= 1){
-    enableSaveButton();
-  } else {
-    disableSaveButton();
+getLocalStorageThenAppendIt = function() {
+  for (i = 0; i < ideaTank.length; i++) {
+    var idea = ideaTank[i];
+    createIdea(idea);
   }
-});
+};
 
-// event listener on save btn
-$('#save-button').on('click', function() {
-  postAndStoreIdea();
-  disableSaveButton();
-  resetInputs();
-});
-
-// Delete button redux
-$('.ideas').on('click', '.delete', function() {
-  $(this).closest('.new-ideas').remove();
-
-  var divId = $(this).closest('.new-ideas').prop('id')
-
-  for (i = 0; i < ideaTank.length; i++){
-    if (Number(divId) === ideaTank[i].id) {
-      ideaTank.splice(i, 1);
-      storeNewIdea();
-    }
-  }
-});
-
-// Event listener on upvote button
-$('.ideas').on('click', '.up', function(){
-  var ideaQuality = $(this).closest('.new-ideas').find('.quality')
-  var ideaQualityVal = ideaQuality.text();
-  var upVotedText = upvoteButton(ideaQualityVal);
-  ideaQuality.text(upVotedText);
-  var divId = $(this).closest('.new-ideas').prop('id')
-  alterValue(divId, "quality", upVotedText)
-});
-
-// Event listener on downvote button
-$('.ideas').on('click', '.down', function() {
-  var ideaQuality = $(this).closest('.new-ideas').find('.quality')
-  var ideaQualityVal = ideaQuality.text();
-  var downvotedText = downvoteButton(ideaQualityVal);
-  ideaQuality.text(downvotedText);
-  var divId = $(this).closest('.new-ideas').prop('id')
-  alterValue(divId, "quality", downvotedText)
-});
-
-// Button helpers
 function upvoteButton(quality) {
   switch (quality) {
     case 'swill':
@@ -103,7 +50,6 @@ function downvoteButton(quality) {
   }
 };
 
-// constructor and relevant helper functions
 function newIdeaFactory(title, body){
   this.title = title;
   this.body = body;
@@ -145,7 +91,62 @@ function createIdea(newIdeaFactory) {
     </div>`
 )};
 
-// event listeners on appended inputs
+// alter value helper, works for quality buttons and inputs
+function alterValue(id, arrayValue, inputValue) {
+  for (i = 0; i < ideaTank.length; i++) {
+    if(Number(id) === ideaTank[i].id) {
+      ideaTank[i][arrayValue] = inputValue;
+      storeNewIdea();
+    }
+  }
+};
+
+// Event Listeners
+$('#title-input, #body-input').on('keyup', function(){
+  var titleInput = $('#title-input').val();
+  var bodyInput = $('#body-input').val();
+  if(titleInput.length >= 1 && bodyInput.length >= 1){
+    enableSaveButton();
+  } else {
+    disableSaveButton();
+  }
+});
+
+$('#save-button').on('click', function() {
+  postAndStoreIdea();
+  disableSaveButton();
+  resetInputs();
+});
+
+$('.ideas').on('click', '.delete', function() {
+  $(this).closest('.new-ideas').remove();
+  var divId = $(this).closest('.new-ideas').prop('id')
+  for (i = 0; i < ideaTank.length; i++){
+    if (Number(divId) === ideaTank[i].id) {
+      ideaTank.splice(i, 1);
+      storeNewIdea();
+    }
+  }
+});
+
+$('.ideas').on('click', '.up', function(){
+  var ideaQuality = $(this).closest('.new-ideas').find('.quality')
+  var ideaQualityVal = ideaQuality.text();
+  var upVotedText = upvoteButton(ideaQualityVal);
+  ideaQuality.text(upVotedText);
+  var divId = $(this).closest('.new-ideas').prop('id')
+  alterValue(divId, "quality", upVotedText)
+});
+
+$('.ideas').on('click', '.down', function() {
+  var ideaQuality = $(this).closest('.new-ideas').find('.quality')
+  var ideaQualityVal = ideaQuality.text();
+  var downvotedText = downvoteButton(ideaQualityVal);
+  ideaQuality.text(downvotedText);
+  var divId = $(this).closest('.new-ideas').prop('id')
+  alterValue(divId, "quality", downvotedText)
+});
+
 $('.ideas').on('blur', '.idea-title', function() {
   var ideaTitle = $(this).closest('.idea-title')
   var ideaTitleValue = ideaTitle.text();
@@ -159,16 +160,6 @@ $('.ideas').on('blur', '.body', function() {
   var divId = $(this).closest('.new-ideas').prop('id')
   alterValue(divId, "body", ideaBodyValue)
 });
-
-// alter value helper, works for quality buttons and inputs
-function alterValue(id, arrayValue, inputValue) {
-  for (i = 0; i < ideaTank.length; i++) {
-    if(Number(id) === ideaTank[i].id) {
-      ideaTank[i][arrayValue] = inputValue;
-      storeNewIdea();
-    }
-  }
-};
 
 // Search
 var searchInput = $('#live-search-ideas');
