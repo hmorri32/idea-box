@@ -116,7 +116,7 @@ function upvoteButton(quality) {
     default:
       return 'genius';
   }
-}
+};
 
 function downvoteButton(quality) {
   switch (quality) {
@@ -127,7 +127,7 @@ function downvoteButton(quality) {
     default:
       return 'swill';
   }
-}
+};
 
 // constructor
 function newIdeaFactory(title, body){
