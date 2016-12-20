@@ -157,7 +157,7 @@ function createIdea(newIdeaFactory) {
     </div>`
 )};
 
-
+// event listeners on appended inputs
 $('.ideas').on('blur', '.idea-title', function() {
   var ideaTitle = $(this).closest('.idea-title')
   var ideaTitleValue = ideaTitle.text();
@@ -179,22 +179,10 @@ $('.ideas').on('blur', '.body', function() {
     if(Number(divId) === ideaTank[i].id) {
       ideaTank[i].body = ideaBodyValue;
       console.log(ideaBodyValue)
-      // storeNewIdea();
+      storeNewIdea();
     }
   }
 });
-
-
-//   var divId = $(this).closest('.new-ideas').prop('id')
-//   for (i = 0; i < ideaTank.length; i++) {
-//     if(Number(divId) === ideaTank[i].id) {
-//       ideaTank[i].quality = downvotedText;
-//       storeNewIdea();
-//     }
-//   }
-// });
-
-
 
 
 // Search
