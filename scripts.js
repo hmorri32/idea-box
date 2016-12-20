@@ -142,7 +142,7 @@ function createIdea(newIdeaFactory) {
   $('.ideas').prepend(
     `<div id=${newIdeaFactory.id} class="new-ideas">
       <div class="idea-header">
-        <h2 contentEditable="true">${newIdeaFactory.title}
+        <h2 class ="idea-title" contentEditable="true">${newIdeaFactory.title}
           <button class="delete"></button>
         </h2>
       </div>
@@ -156,6 +156,32 @@ function createIdea(newIdeaFactory) {
       </div>
     </div>`
 )};
+
+
+$('.ideas').on('blur', '.idea-title', function() {
+  var ideaTitle = $(this).closest('.idea-title')
+  var ideaTitleValue = ideaTitle.text();
+  console.log("im working")
+
+  var divId = $(this).closest('.new-ideas').prop('id')
+  for (i = 0; i < ideaTank.length; i++) {
+    if(Number(divId) === ideaTank[i].id) {
+      ideaTank[i].title = ideaTitleValue;
+      console.log(ideaTitleValue)
+    }
+  }
+});
+
+
+//   var divId = $(this).closest('.new-ideas').prop('id')
+//   for (i = 0; i < ideaTank.length; i++) {
+//     if(Number(divId) === ideaTank[i].id) {
+//       ideaTank[i].quality = downvotedText;
+//       storeNewIdea();
+//     }
+//   }
+// });
+
 
 
 
