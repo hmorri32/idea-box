@@ -161,13 +161,25 @@ function createIdea(newIdeaFactory) {
 $('.ideas').on('blur', '.idea-title', function() {
   var ideaTitle = $(this).closest('.idea-title')
   var ideaTitleValue = ideaTitle.text();
-  console.log("im working")
-
   var divId = $(this).closest('.new-ideas').prop('id')
   for (i = 0; i < ideaTank.length; i++) {
     if(Number(divId) === ideaTank[i].id) {
       ideaTank[i].title = ideaTitleValue;
       console.log(ideaTitleValue)
+      storeNewIdea();
+    }
+  }
+});
+
+$('.ideas').on('blur', '.body', function() {
+  var ideaBody = $(this).closest('.body')
+  var ideaBodyValue = ideaBody.text();
+  var divId = $(this).closest('.new-ideas').prop('id')
+  for (i = 0; i < ideaTank.length; i++) {
+    if(Number(divId) === ideaTank[i].id) {
+      ideaTank[i].body = ideaBodyValue;
+      console.log(ideaBodyValue)
+      // storeNewIdea();
     }
   }
 });
