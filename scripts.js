@@ -60,20 +60,35 @@ $('.ideas').on('click', '.delete', function() {
 });
 
 // Event listener on upvote button
-$('.ideas').on('click', '.up', function() {
-var ideaQuality = $(this).closest('.new-ideas').find('.quality')
-var ideaQualityVal = ideaQuality.text();
-var upvotedText = upvoteButton(ideaQualityVal);
-ideaQuality.text(upvotedText);
+$('.ideas').on('click', '.up', function(){
+  var ideaQuality = $(this).closest('.new-ideas').find('.quality')
+  var ideaQualityVal = ideaQuality.text();
+  var upVotedText = upvoteButton(ideaQualityVal);
+  ideaQuality.text(upVotedText);
 
-var id = $(this).closest('.new-ideas').prop('id')
-var storedArray = JSON.parse(localStorage.getItem('savedArrayObject'))
-for (i = 0; i < storedArray.length; i++) {
-  if(Number(id) === storedArray[i].id){
-    storedArray[i].quality = upvotedText;
-    localStorage.setItem('savedArrayObject', JSON.stringify(storedArray));
+  var divId = $(this).closest('.new-ideas').prop('id')
+  for (i = 0; i < ideaTank.length; i++) {
+    if(Number(divId) === ideaTank[i].id) {
+      ideaTank[i].quality = upVotedText;
+      storeNewIdea();
+    }
   }
-}});
+});
+
+// $('.ideas').on('click', '.up', function() {
+// var ideaQuality = $(this).closest('.new-ideas').find('.quality')
+// var ideaQualityVal = ideaQuality.text();
+// var upvotedText = upvoteButton(ideaQualityVal);
+// ideaQuality.text(upvotedText);
+//
+// var id = $(this).closest('.new-ideas').prop('id')
+// var storedArray = JSON.parse(localStorage.getItem('savedArrayObject'))
+// for (i = 0; i < storedArray.length; i++) {
+//   if(Number(id) === storedArray[i].id){
+//     storedArray[i].quality = upvotedText;
+//     localStorage.setItem('savedArrayObject', JSON.stringify(storedArray));
+//   }
+// }});
 
 // Event listener on downvote button
 $('.ideas').on('click', '.down', function() {
