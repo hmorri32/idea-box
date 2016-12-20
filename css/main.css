@@ -1,12 +1,17 @@
 html, body {
   font-family: 'Open-Sans', sans-serif; }
 
+*:focus {
+  outline: none;
+}
+
 h1,
 h2,
 span {
   font-weight: 700;
   font-family: "Roboto Slab", serif;
  }
+
 
 .inputs-go-here {
   width: 100%;

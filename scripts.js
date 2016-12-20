@@ -71,7 +71,6 @@ $('.ideas').on('click', '.delete', function() {
       storeNewIdea();
     }
   }
-
 })
 
 // Event listener on upvote button
