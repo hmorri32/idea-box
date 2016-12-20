@@ -46,18 +46,33 @@ $('#save-button').on('click', function() {
 });
 
 // Event listener on delete button
-$('.ideas').on('click', '.delete', function(e) {
-  $(e.target).closest('.new-ideas').remove();
+// $('.ideas').on('click', '.delete', function(e) {
+//   $(e.target).closest('.new-ideas').remove();
+//
+//   var id = $(this).closest('.new-ideas').prop('id')
+//   var storedArray = JSON.parse(localStorage.getItem('savedArrayObject'))
+//   for (i = 0; i < storedArray.length; i++) {
+//     if (Number(id) === storedArray[i].id){
+//       storedArray.splice(i,i);
+//       localStorage.setItem('savedArrayObject', JSON.stringify(storedArray));
+//     }
+//     // if 0 items, local storage clear or whatever
+// }});
 
-  var id = $(this).closest('.new-ideas').prop('id')
-  var storedArray = JSON.parse(localStorage.getItem('savedArrayObject'))
-  for (i = 0; i < storedArray.length; i++) {
-    if (Number(id) === storedArray[i].id){
-      storedArray.splice(i,i);
-      localStorage.setItem('savedArrayObject', JSON.stringify(storedArray));
+// Delete button redux
+$('.ideas').on('click', '.delete', function() {
+  $(this).closest('.new-ideas').remove();
+
+  var divId = $(this).closest('.new-ideas').prop('id')
+
+  for (i = 0; i < ideaTank.length; i++){
+    if (Number(divId) === ideaTank[i].id) {
+      ideaTank.splice(i, i);
+      storeNewIdea();
     }
-    // if 0 items, local storage clear or whatever
-}});
+  }
+
+})
 
 // Event listener on upvote button
 $('.ideas').on('click', '.up', function() {
