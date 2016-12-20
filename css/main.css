@@ -11,6 +11,9 @@ span {
   font-weight: 700;
   font-family: "Roboto Slab", serif;
  }
+ .quality {
+   font-weight: 400;
+ }
 
 
 .inputs-go-here {
