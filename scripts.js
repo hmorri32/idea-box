@@ -6,6 +6,10 @@ $(document).ready(function() {
   console.log(localStorage);
 });
 
+getLocalStorage = function() {
+
+}
+
 getLocalStorageThenAppendIt = function() {
   for (i = 0; i < ideaTank.length; i++) {
     var idea = ideaTank[i];
@@ -74,21 +78,6 @@ $('.ideas').on('click', '.up', function(){
     }
   }
 });
-
-// $('.ideas').on('click', '.up', function() {
-// var ideaQuality = $(this).closest('.new-ideas').find('.quality')
-// var ideaQualityVal = ideaQuality.text();
-// var upvotedText = upvoteButton(ideaQualityVal);
-// ideaQuality.text(upvotedText);
-//
-// var id = $(this).closest('.new-ideas').prop('id')
-// var storedArray = JSON.parse(localStorage.getItem('savedArrayObject'))
-// for (i = 0; i < storedArray.length; i++) {
-//   if(Number(id) === storedArray[i].id){
-//     storedArray[i].quality = upvotedText;
-//     localStorage.setItem('savedArrayObject', JSON.stringify(storedArray));
-//   }
-// }});
 
 // Event listener on downvote button
 $('.ideas').on('click', '.down', function() {
@@ -183,5 +172,11 @@ searchInput.on('keyup', function(){
     var text = $(element).text().toLowerCase();
     var match = !!text.match(searchTerm);
     $(element).toggle(match);
+    // if (match) {
+//   $(element).show();
+// } else {
+//   $(element).hide();
+// }
+
   })
 });
