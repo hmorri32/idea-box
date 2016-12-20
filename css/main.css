@@ -23,7 +23,7 @@ span {
 
 .input-h1 {
   text-align: center;
-  padding: 20px 0 20px 0;
+  padding: 20px;
 }
 
 #header-box-text {
@@ -46,7 +46,7 @@ span {
  height: 20px;
  margin-bottom: 20px;
  border: 1px solid #D1D3D4;
- }
+}
 
 #body-input {
  resize: none;
@@ -73,14 +73,14 @@ span {
   margin: auto;
   margin-bottom: 30px;
   border-bottom: 1px solid #D1D3D4;
-}
-.new-ideas {
   color: #6D6E71;
 }
+
 .new-ideas h2 {
   font-size: 30px;
   margin-bottom: 10px;
 }
+
 .new-ideas p {
   color: #939598;
   margin-bottom: 10px;
@@ -91,6 +91,7 @@ span {
   display: inline-block;
   vertical-align: super;
 }
+
 .footer {
   margin-bottom: 10px;
 }
@@ -105,6 +106,7 @@ span {
   width: 30px;
   vertical-align: top;
 }
+
 .delete:hover {
   background-image: url("../images/delete-hover.svg");
 }
@@ -116,6 +118,7 @@ span {
   height: 30px;
   width: 30px;
 }
+
 .up:hover {
   background-image: url("../images/upvote-hover.svg");
 }
@@ -127,9 +130,11 @@ span {
   height: 30px;
   width: 30px;
 }
+
 .down:hover {
   background-image: url("../images/downvote-hover.svg");
 }
+
 
 @media screen and (min-width: 700px) {
   #title-input,
@@ -140,6 +145,7 @@ span {
     width: 50%;
   }
 }
+
 
 @media screen and (max-width: 500px){
   .inputs-go-here {
