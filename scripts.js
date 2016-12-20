@@ -45,20 +45,6 @@ $('#save-button').on('click', function() {
   resetInputs();
 });
 
-// Event listener on delete button
-// $('.ideas').on('click', '.delete', function(e) {
-//   $(e.target).closest('.new-ideas').remove();
-//
-//   var id = $(this).closest('.new-ideas').prop('id')
-//   var storedArray = JSON.parse(localStorage.getItem('savedArrayObject'))
-//   for (i = 0; i < storedArray.length; i++) {
-//     if (Number(id) === storedArray[i].id){
-//       storedArray.splice(i,i);
-//       localStorage.setItem('savedArrayObject', JSON.stringify(storedArray));
-//     }
-//     // if 0 items, local storage clear or whatever
-// }});
-
 // Delete button redux
 $('.ideas').on('click', '.delete', function() {
   $(this).closest('.new-ideas').remove();
@@ -71,7 +57,7 @@ $('.ideas').on('click', '.delete', function() {
       storeNewIdea();
     }
   }
-})
+});
 
 // Event listener on upvote button
 $('.ideas').on('click', '.up', function() {
@@ -105,8 +91,7 @@ $('.ideas').on('click', '.down', function() {
   }
 });
 
-
-// helpers
+// Button helpers
 function upvoteButton(quality) {
   switch (quality) {
     case 'swill':
@@ -173,11 +158,9 @@ function createIdea(newIdeaFactory) {
 
 
 
-// Search Notes
-
+// Search
 
 var searchInput = $('#live-search-ideas');
-// var inspirationElement =
 
 searchInput.on('keyup', function(){
   var searchTerm = $(this).val().toLowerCase();
