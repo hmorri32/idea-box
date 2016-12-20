@@ -159,8 +159,9 @@ function createIdea(newIdeaFactory) {
 
 
 $('.new-ideas h2 p').each(function(){
-$(this).attr('data-search-term', $(this).text().toLowerCase());
+  $(this).attr('data-search-term', $(this).text().toLowerCase());
 });
+
 $('#live-search-ideas').on('keyup', function(){
   var searchTerm = $(this).val().toLowerCase();
     $('.new-ideas h2 p').each(function(){
@@ -170,8 +171,8 @@ $('#live-search-ideas').on('keyup', function(){
           $(this).hide();
       }
 
-          });
     });
+});
 
 //
 // // $('.live-search-list li').each(function(){
