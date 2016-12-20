@@ -7,13 +7,10 @@ $(document).ready(function() {
 });
 
 getLocalStorageThenAppendIt = function() {
-  // var persist = JSON.parse(localStorage.getItem("savedArrayObject"));
-  // if (ideaTank) {
-    for (i = 0; i < ideaTank.length; i++) {
-      var idea = ideaTank[i];
-      createIdea(idea);
-    }
-  // }
+  for (i = 0; i < ideaTank.length; i++) {
+    var idea = ideaTank[i];
+    createIdea(idea);
+  }
 };
 
 // functions to enable/disable the save button/ clear inputs
@@ -48,7 +45,7 @@ $('#save-button').on('click', function() {
   resetInputs();
 });
 
-// Delete button
+// Event listener on delete button
 $('.ideas').on('click', '.delete', function(e) {
   $(e.target).closest('.new-ideas').remove();
 
@@ -62,12 +59,12 @@ $('.ideas').on('click', '.delete', function(e) {
     // if 0 items, local storage clear or whatever
 }});
 
-// Upvote button
+// Event listener on upvote button
 $('.ideas').on('click', '.up', function() {
-var closestQuality = $(this).closest('.new-ideas').find('.quality')
-var closestQualityVal = closestQuality.text();
-var upvotedText = upvoteButton(closestQualityVal);
-closestQuality.text(upvotedText);
+var ideaQuality = $(this).closest('.new-ideas').find('.quality')
+var ideaQualityVal = ideaQuality.text();
+var upvotedText = upvoteButton(ideaQualityVal);
+ideaQuality.text(upvotedText);
 
 var id = $(this).closest('.new-ideas').prop('id')
 var storedArray = JSON.parse(localStorage.getItem('savedArrayObject'))
@@ -78,7 +75,23 @@ for (i = 0; i < storedArray.length; i++) {
   }
 }});
 
-// Downvote button
+// Event listener on downvote button
+$('.ideas').on('click', '.down', function() {
+  var ideaQuality = $(this).closest('.new-ideas').find('.quality')
+  var ideaQualityVal = ideaQuality.text();
+  var downvotedText = downvoteButton(ideaQualityVal);
+  ideaQuality.text(downvotedText);
+
+  var divId = $(this).closest('.new-ideas').prop('id')
+  for (i = 0; i < ideaTank.length; i++) {
+    if(Number(divId) === ideaTank[i].id) {
+      ideaTank[i].quality = downvotedText;
+      console.log(divId)
+    }
+  }
+
+});
+
 
 // helpers
 function upvoteButton(quality) {
