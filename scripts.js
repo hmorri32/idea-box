@@ -160,6 +160,7 @@ $('.ideas').on('blur', '.body', function() {
   alterValue(divId, "body", ideaBodyValue)
 });
 
+// alter value helper, works for quality buttons and inputs
 function alterValue(id, arrayValue, inputValue) {
   for (i = 0; i < ideaTank.length; i++) {
     if(Number(id) === ideaTank[i].id) {
@@ -167,10 +168,9 @@ function alterValue(id, arrayValue, inputValue) {
       storeNewIdea();
     }
   }
-}
+};
 
 // Search
-
 var searchInput = $('#live-search-ideas');
 
 searchInput.on('keyup', function(){
