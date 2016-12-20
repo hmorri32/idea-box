@@ -156,24 +156,23 @@ function createIdea(newIdeaFactory) {
 //    });
 //  });
 // }
+var searchInput = $('#search');
+// var inspirationElement =
 
-
-$('.new-ideas h2 p').each(function(){
-  $(this).attr('data-search-term', $(this).text().toLowerCase());
-});
-
-$('#live-search-ideas').on('keyup', function(){
+searchInput.on('keyup', function(){
   var searchTerm = $(this).val().toLowerCase();
-    $('.new-ideas h2 p').each(function(){
-      if ($(this).filter('[data-search-term *= ' + searchTerm + ']').length > 0 || searchTerm.length < 1) {
-          $(this).show();
-      } else {
-          $(this).hide();
-      }
+  $('.inspiration').each(function (index, element) {
+    var text = $(element).text().toLowerCase();
+    var match = !!text.match(searchTerm);
+    $(element).toggle(match);
+    // if (match) {
+    //   $(element).show();
+    // } else {
+    //   $(element).hide();
+    // }
 
-    });
+  })  
 });
-
 //
 // // $('.live-search-list li').each(function(){
 // // $(this).attr('data-search-term', $(this).text().toLowerCase());
