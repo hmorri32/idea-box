@@ -66,16 +66,8 @@ $('.ideas').on('click', '.up', function(){
   var ideaQualityVal = ideaQuality.text();
   var upVotedText = upvoteButton(ideaQualityVal);
   ideaQuality.text(upVotedText);
-
   var divId = $(this).closest('.new-ideas').prop('id')
   alterValue(divId, "quality", upVotedText)
-
-  // for (i = 0; i < ideaTank.length; i++) {
-  //   if(Number(divId) === ideaTank[i].id) {
-  //     ideaTank[i].quality = upVotedText;
-  //     storeNewIdea();
-  //   }
-  // }
 });
 
 // Event listener on downvote button
@@ -84,16 +76,8 @@ $('.ideas').on('click', '.down', function() {
   var ideaQualityVal = ideaQuality.text();
   var downvotedText = downvoteButton(ideaQualityVal);
   ideaQuality.text(downvotedText);
-
   var divId = $(this).closest('.new-ideas').prop('id')
   alterValue(divId, "quality", downvotedText)
-
-  // for (i = 0; i < ideaTank.length; i++) {
-  //   if(Number(divId) === ideaTank[i].id) {
-  //     ideaTank[i].quality = downvotedText;
-  //     storeNewIdea();
-  //   }
-  // }
 });
 
 // Button helpers
@@ -167,13 +151,6 @@ $('.ideas').on('blur', '.idea-title', function() {
   var ideaTitleValue = ideaTitle.text();
   var divId = $(this).closest('.new-ideas').prop('id')
   alterValue(divId, "title", ideaTitleValue)
-  // for (i = 0; i < ideaTank.length; i++) {
-  //   if(Number(divId) === ideaTank[i].id) {
-  //     ideaTank[i].title = ideaTitleValue;
-  //     console.log(ideaTitleValue)
-  //     storeNewIdea();
-  //   }
-  // }
 });
 
 $('.ideas').on('blur', '.body', function() {
@@ -181,20 +158,12 @@ $('.ideas').on('blur', '.body', function() {
   var ideaBodyValue = ideaBody.text();
   var divId = $(this).closest('.new-ideas').prop('id')
   alterValue(divId, "body", ideaBodyValue)
-  // for (i = 0; i < ideaTank.length; i++) {
-  //   if(Number(divId) === ideaTank[i].id) {
-  //     ideaTank[i].body = ideaBodyValue;
-  //     console.log(ideaBodyValue)
-  //     storeNewIdea();
-  //   }
-  // }
 });
 
 function alterValue(id, arrayValue, inputValue) {
   for (i = 0; i < ideaTank.length; i++) {
     if(Number(id) === ideaTank[i].id) {
       ideaTank[i][arrayValue] = inputValue;
-      console.log(inputValue)
       storeNewIdea();
     }
   }
