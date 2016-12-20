@@ -1,10 +1,17 @@
 html, body {
   font-family: 'Open-Sans', sans-serif; }
 
-h1 {
+*:focus {
+  outline: none;
+}
+
+h1,
+h2,
+span {
   font-weight: 700;
   font-family: "Roboto Slab", serif;
  }
+
 
 .inputs-go-here {
   width: 100%;
@@ -16,6 +23,7 @@ h1 {
   text-align: center;
   padding: 20px 0 20px 0;
 }
+
 #header-box-text {
   color: #6D6E71;
 }
@@ -62,6 +70,26 @@ h1 {
   width: 75%;
   margin: auto;
   margin-bottom: 30px;
+  border-bottom: 1px solid #D1D3D4;
+}
+.new-ideas {
+  color: #6D6E71;
+}
+.new-ideas h2 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+.new-ideas p {
+  color: #939598;
+  margin-bottom: 10px;
+}
+.idea-quality {
+  font-size: 20px;
+  display: inline-block;
+  vertical-align: super;
+}
+.footer {
+  margin-bottom: 10px;
 }
 
 .delete {
