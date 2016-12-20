@@ -1,5 +1,3 @@
-// Quality array- easy to select later.
-// var ideaQuality = ['swill', 'plausible', 'genius'];
 var ideaTank = JSON.parse(localStorage.getItem("savedArrayObject")) || [];
 
 // grabs local storage on load. Persisting.
@@ -9,21 +7,21 @@ $(document).ready(function() {
 });
 
 getLocalStorageThenAppendIt = function() {
-  var persist = JSON.parse(localStorage.getItem("savedArrayObject"));
-  if (persist) {
-    for (i = 0; i < persist.length; i++) {
-      var idea = persist[i];
+  // var persist = JSON.parse(localStorage.getItem("savedArrayObject"));
+  // if (ideaTank) {
+    for (i = 0; i < ideaTank.length; i++) {
+      var idea = ideaTank[i];
       createIdea(idea);
     }
-  }
+  // }
 };
 
 // functions to enable/disable the save button/ clear inputs
-function enableSave() {
+function enableSaveButton() {
   $("#save-button").prop('disabled', false)
 };
 
-function disableSave() {
+function disableSaveButton() {
   $("#save-button").prop('disabled', true)
 };
 
@@ -37,16 +35,16 @@ $('#title-input, #body-input').on('keyup', function(){
   var titleInput = $('#title-input').val();
   var bodyInput = $('#body-input').val();
   if(titleInput.length >= 1 && bodyInput.length >= 1){
-    enableSave()
+    enableSaveButton();
   } else {
-    disableSave()
+    disableSaveButton();
   }
 });
 
 // event listener on save btn
 $('#save-button').on('click', function() {
   postAndStoreIdea();
-  disableSave();
+  disableSaveButton();
   resetInputs();
 });
 
@@ -81,10 +79,8 @@ for (i = 0; i < storedArray.length; i++) {
 }});
 
 // Downvote button
-function storeStuffForUpvote(){
 
-}
-
+// helpers
 function upvoteButton(quality) {
   switch (quality) {
     case 'swill':
