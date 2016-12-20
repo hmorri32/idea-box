@@ -48,18 +48,10 @@ $('.ideas').on('click', '.delete', function(e) {
   var storedArray = JSON.parse(localStorage.getItem('savedArrayObject'))
   for (i = 0; i < storedArray.length; i++) {
     if(Number(id) === storedArray[i].id){
-      // debugger
       storedArray.splice(i,i);
-
-      // storedArray.splice(i, 1)
-      // debugger
-      // console.log(spliced)
-      // slice out the deleted object from array
-      // store this new array in a variable
-      // save the whole new array back into localStorage
-
       localStorage.setItem('savedArrayObject', JSON.stringify(storedArray));
     }
+    // if 0 items, local storage clear or whatever
 }});
 
 // Upvote and button
@@ -143,3 +135,6 @@ function createIdea(newIdeaFactory) {
       </div>
     </div>`
 )};
+
+
+// Search
