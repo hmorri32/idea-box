@@ -57,11 +57,14 @@ var upvotedText = upvoteButton(closestQualityVal);
 closestQuality.text(upvotedText);
 
 var id = $(this).closest('.new-ideas').prop('id')
-var newId = JSON.parse(localStorage.getItem('savedArrayObject'))
-console.log(newId);
-// newId.quality = upvotedText;
-// console.log(newId.quality);
-});
+var storedArray = JSON.parse(localStorage.getItem('savedArrayObject'))
+for (i = 0; i < storedArray.length; i++) {
+  if(Number(id) === storedArray[i].id){
+    storedArray[i].quality = upvotedText;
+    localStorage.setItem('savedArrayObject', JSON.stringify(storedArray));
+  }
+}});
+
 
 function upvoteButton(quality) {
   switch (quality) {
