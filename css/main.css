@@ -11,8 +11,9 @@ span {
   font-weight: 700;
   font-family: "Roboto Slab", serif;
  }
- .quality {
-   font-weight: 400;
+
+.quality {
+ font-weight: 400;
  }
 
 .inputs-go-here {
@@ -56,9 +57,11 @@ span {
  background-color: #00A79D;
  color: #FFFFFF;
 }
+
 #save-button:hover {
   background-color: #045E55;
 }
+
 #save-button:disabled {
   background-color: #00A79D
 }
