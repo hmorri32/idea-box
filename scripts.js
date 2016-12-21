@@ -1,15 +1,14 @@
+// Global Var - Local Storage Array
 var ideaTank = JSON.parse(localStorage.getItem("savedArrayObject")) || [];
 
-// grabs local storage on load. Persisting.
+// Grabs local storage stuff on load. Appends it. Clears inputs.
 $(document).ready(function() {
   getLocalStorageThenAppendIt();
   console.log(localStorage);
+  resetInputs();
 });
 
-getLocalStorage = function() {
-
-}
-
+// Helper functions
 getLocalStorageThenAppendIt = function() {
   for (i = 0; i < ideaTank.length; i++) {
     var idea = ideaTank[i];
@@ -17,7 +16,6 @@ getLocalStorageThenAppendIt = function() {
   }
 };
 
-// functions to enable/disable the save button/ clear inputs
 function enableSaveButton() {
   $("#save-button").prop('disabled', false)
 };
@@ -31,71 +29,6 @@ function resetInputs() {
   $('#body-input').val('');
 };
 
-// keyup on input fields to enable save button
-$('#title-input, #body-input').on('keyup', function(){
-  var titleInput = $('#title-input').val();
-  var bodyInput = $('#body-input').val();
-  if(titleInput.length >= 1 && bodyInput.length >= 1){
-    enableSaveButton();
-  } else {
-    disableSaveButton();
-  }
-});
-
-// event listener on save btn
-$('#save-button').on('click', function() {
-  postAndStoreIdea();
-  disableSaveButton();
-  resetInputs();
-});
-
-// Delete button redux
-$('.ideas').on('click', '.delete', function() {
-  $(this).closest('.new-ideas').remove();
-
-  var divId = $(this).closest('.new-ideas').prop('id')
-
-  for (i = 0; i < ideaTank.length; i++){
-    if (Number(divId) === ideaTank[i].id) {
-      ideaTank.splice(i, 1);
-      storeNewIdea();
-    }
-  }
-});
-
-// Event listener on upvote button
-$('.ideas').on('click', '.up', function(){
-  var ideaQuality = $(this).closest('.new-ideas').find('.quality')
-  var ideaQualityVal = ideaQuality.text();
-  var upVotedText = upvoteButton(ideaQualityVal);
-  ideaQuality.text(upVotedText);
-
-  var divId = $(this).closest('.new-ideas').prop('id')
-  for (i = 0; i < ideaTank.length; i++) {
-    if(Number(divId) === ideaTank[i].id) {
-      ideaTank[i].quality = upVotedText;
-      storeNewIdea();
-    }
-  }
-});
-
-// Event listener on downvote button
-$('.ideas').on('click', '.down', function() {
-  var ideaQuality = $(this).closest('.new-ideas').find('.quality')
-  var ideaQualityVal = ideaQuality.text();
-  var downvotedText = downvoteButton(ideaQualityVal);
-  ideaQuality.text(downvotedText);
-
-  var divId = $(this).closest('.new-ideas').prop('id')
-  for (i = 0; i < ideaTank.length; i++) {
-    if(Number(divId) === ideaTank[i].id) {
-      ideaTank[i].quality = downvotedText;
-      storeNewIdea();
-    }
-  }
-});
-
-// Button helpers
 function upvoteButton(quality) {
   switch (quality) {
     case 'swill':
@@ -118,7 +51,7 @@ function downvoteButton(quality) {
   }
 };
 
-// constructor
+// Constructor stuff
 function newIdeaFactory(title, body){
   this.title = title;
   this.body = body;
@@ -145,7 +78,7 @@ function createIdea(newIdeaFactory) {
   $('.ideas').prepend(
     `<div id=${newIdeaFactory.id} class="new-ideas">
       <div class="idea-header">
-        <h2 contentEditable="true">${newIdeaFactory.title}
+        <h2 class ="idea-title" contentEditable="true">${newIdeaFactory.title}
           <button class="delete"></button>
         </h2>
       </div>
@@ -160,10 +93,77 @@ function createIdea(newIdeaFactory) {
     </div>`
 )};
 
+// alter value helper, works for quality buttons and inputs
+function alterValueAndStoreIt(id, arrayValue, inputValue) {
+  for (i = 0; i < ideaTank.length; i++) {
+    if(Number(id) === ideaTank[i].id) {
+      ideaTank[i][arrayValue] = inputValue;
+      storeNewIdea();
+    }
+  }
+};
 
+// Event Listeners
+$('#title-input, #body-input').on('keyup', function(){
+  var titleInput = $('#title-input').val();
+  var bodyInput = $('#body-input').val();
+  if(titleInput.length >= 1 && bodyInput.length >= 1){
+    enableSaveButton();
+  } else {
+    disableSaveButton();
+  }
+});
+
+$('#save-button').on('click', function() {
+  postAndStoreIdea();
+  disableSaveButton();
+  resetInputs();
+});
+
+$('.ideas').on('click', '.delete', function() {
+  $(this).closest('.new-ideas').remove();
+  var divId = $(this).closest('.new-ideas').prop('id')
+  for (i = 0; i < ideaTank.length; i++){
+    if (Number(divId) === ideaTank[i].id) {
+      ideaTank.splice(i, 1);
+      storeNewIdea();
+    }
+  }
+});
+
+$('.ideas').on('click', '.up', function(){
+  var ideaQuality = $(this).closest('.new-ideas').find('.quality')
+  var ideaQualityVal = ideaQuality.text();
+  var upVotedText = upvoteButton(ideaQualityVal);
+  ideaQuality.text(upVotedText);
+  var divId = $(this).closest('.new-ideas').prop('id')
+  alterValueAndStoreIt(divId, "quality", upVotedText)
+});
+
+$('.ideas').on('click', '.down', function() {
+  var ideaQuality = $(this).closest('.new-ideas').find('.quality')
+  var ideaQualityVal = ideaQuality.text();
+  var downvotedText = downvoteButton(ideaQualityVal);
+  ideaQuality.text(downvotedText);
+  var divId = $(this).closest('.new-ideas').prop('id')
+  alterValueAndStoreIt(divId, "quality", downvotedText)
+});
+
+$('.ideas').on('blur', '.idea-title', function() {
+  var ideaTitle = $(this).closest('.idea-title')
+  var ideaTitleValue = ideaTitle.text();
+  var divId = $(this).closest('.new-ideas').prop('id')
+  alterValueAndStoreIt(divId, "title", ideaTitleValue)
+});
+
+$('.ideas').on('blur', '.body', function() {
+  var ideaBody = $(this).closest('.body')
+  var ideaBodyValue = ideaBody.text();
+  var divId = $(this).closest('.new-ideas').prop('id')
+  alterValueAndStoreIt(divId, "body", ideaBodyValue)
+});
 
 // Search
-
 var searchInput = $('#live-search-ideas');
 
 searchInput.on('keyup', function(){
@@ -172,11 +172,5 @@ searchInput.on('keyup', function(){
     var text = $(element).text().toLowerCase();
     var match = !!text.match(searchTerm);
     $(element).toggle(match);
-    // if (match) {
-//   $(element).show();
-// } else {
-//   $(element).hide();
-// }
-
   })
 });

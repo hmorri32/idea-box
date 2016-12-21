@@ -8,10 +8,13 @@ html, body {
 h1,
 h2,
 span {
-  font-weight: 700;
   font-family: "Roboto Slab", serif;
- }
+  font-weight: 700;
+}
 
+.quality {
+ font-weight: 400;
+}
 
 .inputs-go-here {
   width: 100%;
@@ -19,20 +22,20 @@ span {
   background-color: #e5f3f2;
 }
 
+.inputs-go-here h1 {
+  display: inline-block;
+  color: #00a79d;
+  font-size: 50px;
+}
+
 .input-h1 {
   text-align: center;
-  padding: 20px 0 20px 0;
+  padding: 20px;
 }
 
 #header-box-text {
   color: #6D6E71;
 }
-
-.inputs-go-here h1 {
- color: #00a79d;
- font-size: 50px;
- display: inline-block;
- }
 
 .inputs-go-here input,
 .inputs-go-here button,
@@ -40,11 +43,11 @@ span {
 .ideas-go-here input {
  display: block;
  width: 75%;
- margin: auto;
  height: 20px;
+ margin: auto;
  margin-bottom: 20px;
  border: 1px solid #D1D3D4;
- }
+}
 
 #body-input {
  resize: none;
@@ -54,9 +57,11 @@ span {
  background-color: #00A79D;
  color: #FFFFFF;
 }
+
 #save-button:hover {
   background-color: #045E55;
 }
+
 #save-button:disabled {
   background-color: #00A79D
 }
@@ -71,23 +76,25 @@ span {
   margin: auto;
   margin-bottom: 30px;
   border-bottom: 1px solid #D1D3D4;
-}
-.new-ideas {
   color: #6D6E71;
 }
+
 .new-ideas h2 {
   font-size: 30px;
   margin-bottom: 10px;
 }
+
 .new-ideas p {
-  color: #939598;
   margin-bottom: 10px;
+  color: #939598;
 }
+
 .idea-quality {
-  font-size: 20px;
   display: inline-block;
   vertical-align: super;
+  font-size: 20px;
 }
+
 .footer {
   margin-bottom: 10px;
 }
@@ -95,35 +102,59 @@ span {
 .delete {
   display: inline-block;
   float: right;
-  background: transparent;
-  border: none;
-  background-image: url("../images/delete.svg");
   height: 30px;
   width: 30px;
   vertical-align: top;
+  background: transparent;
+  border: none;
+  background-image: url("../images/delete.svg");
 }
+
 .delete:hover {
   background-image: url("../images/delete-hover.svg");
 }
 
 .up {
+  height: 30px;
+  width: 30px;
   background: transparent;
   border: none;
   background-image: url("../images/upvote.svg");
-  height: 30px;
-  width: 30px;
 }
+
 .up:hover {
   background-image: url("../images/upvote-hover.svg");
 }
 
 .down {
+  height: 30px;
+  width: 30px;
   background: transparent;
   border: none;
   background-image: url("../images/downvote.svg");
-  height: 30px;
-  width: 30px;
 }
+
 .down:hover {
   background-image: url("../images/downvote-hover.svg");
+}
+
+
+@media screen and (min-width: 700px) {
+  #title-input,
+  #body-input,
+  #save-button,
+  #live-search-ideas,
+  .new-ideas {
+    width: 50%;
+  }
+}
+
+
+@media screen and (max-width: 500px){
+  .inputs-go-here {
+    height: 250px;
+  }
+  #body-input {
+    height: 55px;
+  }
 }
