@@ -6,11 +6,8 @@ $(document).ready(function() {
   console.log(localStorage);
 });
 
-getLocalStorage = function() {
 
-}
-
-getLocalStorageThenAppendIt = function() {
+var getLocalStorageThenAppendIt = function() {
   for (i = 0; i < ideaTank.length; i++) {
     var idea = ideaTank[i];
     createIdea(idea);
@@ -20,16 +17,16 @@ getLocalStorageThenAppendIt = function() {
 // functions to enable/disable the save button/ clear inputs
 function enableSaveButton() {
   $("#save-button").prop('disabled', false)
-};
+}
 
 function disableSaveButton() {
   $("#save-button").prop('disabled', true)
-};
+}
 
 function resetInputs() {
   $('#title-input').val('');
   $('#body-input').val('');
-};
+}
 
 // keyup on input fields to enable save button
 $('#title-input, #body-input').on('keyup', function(){
@@ -41,6 +38,16 @@ $('#title-input, #body-input').on('keyup', function(){
     disableSaveButton();
   }
 });
+
+// function for enter button
+$(document).keypress(function(e) {
+    if(e.which == 13) {
+      $('.idea-header').focusout();
+      $('#title-input').focus();
+      e.preventDefault();
+    }
+});
+
 
 // event listener on save btn
 $('#save-button').on('click', function() {
@@ -105,7 +112,7 @@ function upvoteButton(quality) {
     default:
       return 'genius';
   }
-};
+}
 
 function downvoteButton(quality) {
   switch (quality) {
@@ -116,7 +123,58 @@ function downvoteButton(quality) {
     default:
       return 'swill';
   }
-};
+}
+
+
+// blur edit function
+$('.ideas').on('blur', '.idea-header', function() {
+  var storedIdea;
+  var ideaElement = $(this).closest('.new-ideas');
+  var ideaHeader = ideaElement.find('.idea-header');
+  var ideaHeaderEdit = ideaHeader.text();
+
+  var id = parseInt($(this).closest('.new-ideas').prop('id'), 10);
+  console.log(id);
+  var savedArrayObject = JSON.parse(localStorage.getItem('savedArrayObject'));
+
+  for (var index in savedArrayObject) {
+    var idea = savedArrayObject[index];
+
+      if (idea.id === id) {
+          storedIdea = idea;
+          storedIdea.title = ideaHeaderEdit;
+          console.log(storedIdea);
+
+          ideaTank[index] = storedIdea;
+          storeNewIdea();
+      }
+  }
+});
+
+$('.ideas').on('blur', '.idea-body', function() {
+  var storedIdea;
+  var ideaElement = $(this).closest('.new-ideas');
+  var ideaBody = ideaElement.find('.idea-body');
+  var ideaBodyEdit = ideaBody.text();
+
+  var id = parseInt($(this).closest('.new-ideas').prop('id'), 10);
+  console.log(id);
+  var savedArrayObject = JSON.parse(localStorage.getItem('savedArrayObject'));
+
+  for (var index in savedArrayObject) {
+    var idea = savedArrayObject[index];
+
+      if (idea.id === id) {
+          storedIdea = idea;
+          storedIdea.body = ideaBodyEdit;
+          console.log(storedIdea);
+
+          ideaTank[index] = storedIdea;
+          storeNewIdea();
+      }
+  }
+})
+
 
 // constructor
 function newIdeaFactory(title, body){
@@ -124,7 +182,7 @@ function newIdeaFactory(title, body){
   this.body = body;
   this.quality = 'swill';
   this.id = Date.now();
-};
+}
 
 function postAndStoreIdea() {
   var titleInput = $('#title-input');
@@ -134,12 +192,12 @@ function postAndStoreIdea() {
   var idea = new newIdeaFactory(title, body);
   createIdea(idea);
   ideaTank.push(idea);
-  storeNewIdea(idea);
-};
+  storeNewIdea();
+}
 
 storeNewIdea = function() {
   localStorage.setItem("savedArrayObject", JSON.stringify(ideaTank));
-};
+}
 
 function createIdea(newIdeaFactory) {
   $('.ideas').prepend(
@@ -158,7 +216,7 @@ function createIdea(newIdeaFactory) {
         <div class="idea-quality"><span>quality:</span> <span class="quality">${newIdeaFactory.quality}</span></div>
       </div>
     </div>`
-)};
+)}
 
 
 
@@ -172,11 +230,5 @@ searchInput.on('keyup', function(){
     var text = $(element).text().toLowerCase();
     var match = !!text.match(searchTerm);
     $(element).toggle(match);
-    // if (match) {
-//   $(element).show();
-// } else {
-//   $(element).hide();
-// }
-
   })
 });
