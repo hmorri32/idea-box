@@ -51,6 +51,16 @@ function downvoteButton(quality) {
   }
 };
 
+// alter value helper, works for quality buttons and inputs
+function alterValueAndStoreIt(id, arrayValue, inputValue) {
+  for (i = 0; i < ideaTank.length; i++) {
+    if(Number(id) === ideaTank[i].id) {
+      ideaTank[i][arrayValue] = inputValue;
+      storeNewIdea();
+    }
+  }
+};
+
 // Constructor stuff
 function newIdeaFactory(title, body){
   this.title = title;
@@ -92,16 +102,6 @@ function createIdea(newIdeaFactory) {
       </div>
     </div>`
 )};
-
-// alter value helper, works for quality buttons and inputs
-function alterValueAndStoreIt(id, arrayValue, inputValue) {
-  for (i = 0; i < ideaTank.length; i++) {
-    if(Number(id) === ideaTank[i].id) {
-      ideaTank[i][arrayValue] = inputValue;
-      storeNewIdea();
-    }
-  }
-};
 
 // Event Listeners
 $('#title-input, #body-input').on('keyup', function(){
