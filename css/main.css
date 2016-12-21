@@ -172,6 +172,16 @@ span {
   .new-ideas {
     width: 85%;
   }
+}
 
-
+@media screen and (max-width: 765px) {
+  .inputs-go-here input,
+  .inputs-go-here button,
+  .inputs-go-here textarea,
+  .ideas-go-here input {
+    width: 70%;
+  }
+  .new-ideas {
+    width: 70%;
+  }
 }

@@ -48,6 +48,20 @@ $(document).keypress(function(e) {
     }
 });
 
+$(document).keypress(function(e) {
+  if (e.which == 13) {
+    $('#title-input').focusout();
+    $('#body-input').focus();
+    e.preventDefault();
+  }
+})
+
+$(document).keypress(function(e) {
+  if (e.which == 13) {
+    $('#body-input')
+  }
+})
+
 
 // event listener on save btn
 $('#save-button').on('click', function() {
