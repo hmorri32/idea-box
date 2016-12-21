@@ -5,6 +5,7 @@ var ideaTank = JSON.parse(localStorage.getItem("savedArrayObject")) || [];
 $(document).ready(function() {
   getLocalStorageThenAppendIt();
   console.log(localStorage);
+  resetInputs();
 });
 
 // Helper functions
