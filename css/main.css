@@ -8,8 +8,8 @@ html, body {
 h1,
 h2,
 span {
-  font-weight: 700;
   font-family: "Roboto Slab", serif;
+  font-weight: 700;
  }
 
 .quality {
@@ -23,10 +23,10 @@ span {
 }
 
 .inputs-go-here h1 {
- color: #00a79d;
- font-size: 50px;
- display: inline-block;
- }
+  display: inline-block;
+  color: #00a79d;
+  font-size: 50px;
+}
 
 .input-h1 {
   text-align: center;
@@ -43,8 +43,8 @@ span {
 .ideas-go-here input {
  display: block;
  width: 75%;
- margin: auto;
  height: 20px;
+ margin: auto;
  margin-bottom: 20px;
  border: 1px solid #D1D3D4;
 }
@@ -85,14 +85,14 @@ span {
 }
 
 .new-ideas p {
-  color: #939598;
   margin-bottom: 10px;
+  color: #939598;
 }
 
 .idea-quality {
-  font-size: 20px;
   display: inline-block;
   vertical-align: super;
+  font-size: 20px;
 }
 
 .footer {
@@ -102,12 +102,12 @@ span {
 .delete {
   display: inline-block;
   float: right;
-  background: transparent;
-  border: none;
-  background-image: url("../images/delete.svg");
   height: 30px;
   width: 30px;
   vertical-align: top;
+  background: transparent;
+  border: none;
+  background-image: url("../images/delete.svg");
 }
 
 .delete:hover {
@@ -115,11 +115,11 @@ span {
 }
 
 .up {
+  height: 30px;
+  width: 30px;
   background: transparent;
   border: none;
   background-image: url("../images/upvote.svg");
-  height: 30px;
-  width: 30px;
 }
 
 .up:hover {
@@ -127,11 +127,11 @@ span {
 }
 
 .down {
+  height: 30px;
+  width: 30px;
   background: transparent;
   border: none;
   background-image: url("../images/downvote.svg");
-  height: 30px;
-  width: 30px;
 }
 
 .down:hover {
