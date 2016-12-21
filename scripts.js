@@ -1,7 +1,7 @@
 // Global Var - Local Storage Array
 var ideaTank = JSON.parse(localStorage.getItem("savedArrayObject")) || [];
 
-// Grabs local storage stuff on load. Appends it.
+// Grabs local storage stuff on load. Appends it. Clears inputs.
 $(document).ready(function() {
   getLocalStorageThenAppendIt();
   console.log(localStorage);
@@ -51,6 +51,7 @@ function downvoteButton(quality) {
   }
 };
 
+// Constructor stuff
 function newIdeaFactory(title, body){
   this.title = title;
   this.body = body;
@@ -93,7 +94,7 @@ function createIdea(newIdeaFactory) {
 )};
 
 // alter value helper, works for quality buttons and inputs
-function alterValue(id, arrayValue, inputValue) {
+function alterValueAndStoreIt(id, arrayValue, inputValue) {
   for (i = 0; i < ideaTank.length; i++) {
     if(Number(id) === ideaTank[i].id) {
       ideaTank[i][arrayValue] = inputValue;
@@ -136,7 +137,7 @@ $('.ideas').on('click', '.up', function(){
   var upVotedText = upvoteButton(ideaQualityVal);
   ideaQuality.text(upVotedText);
   var divId = $(this).closest('.new-ideas').prop('id')
-  alterValue(divId, "quality", upVotedText)
+  alterValueAndStoreIt(divId, "quality", upVotedText)
 });
 
 $('.ideas').on('click', '.down', function() {
@@ -145,21 +146,21 @@ $('.ideas').on('click', '.down', function() {
   var downvotedText = downvoteButton(ideaQualityVal);
   ideaQuality.text(downvotedText);
   var divId = $(this).closest('.new-ideas').prop('id')
-  alterValue(divId, "quality", downvotedText)
+  alterValueAndStoreIt(divId, "quality", downvotedText)
 });
 
 $('.ideas').on('blur', '.idea-title', function() {
   var ideaTitle = $(this).closest('.idea-title')
   var ideaTitleValue = ideaTitle.text();
   var divId = $(this).closest('.new-ideas').prop('id')
-  alterValue(divId, "title", ideaTitleValue)
+  alterValueAndStoreIt(divId, "title", ideaTitleValue)
 });
 
 $('.ideas').on('blur', '.body', function() {
   var ideaBody = $(this).closest('.body')
   var ideaBodyValue = ideaBody.text();
   var divId = $(this).closest('.new-ideas').prop('id')
-  alterValue(divId, "body", ideaBodyValue)
+  alterValueAndStoreIt(divId, "body", ideaBodyValue)
 });
 
 // Search
