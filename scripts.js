@@ -56,11 +56,11 @@ $(document).keypress(function(e) {
   }
 })
 
-$(document).keypress(function(e) {
-  if (e.which == 13) {
-    $('#body-input')
-  }
-})
+$("#body-input").keydown(function(e){
+       if(e.which === 13){
+           $("#save-button").click();
+       }
+   });
 
 
 // event listener on save btn
