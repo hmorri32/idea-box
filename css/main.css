@@ -22,6 +22,12 @@ span {
   background-color: #e5f3f2;
 }
 
+.inputs-go-here h1 {
+ color: #00a79d;
+ font-size: 50px;
+ display: inline-block;
+ }
+
 .input-h1 {
   text-align: center;
   padding: 20px;
@@ -30,12 +36,6 @@ span {
 #header-box-text {
   color: #6D6E71;
 }
-
-.inputs-go-here h1 {
- color: #00a79d;
- font-size: 50px;
- display: inline-block;
- }
 
 .inputs-go-here input,
 .inputs-go-here button,
